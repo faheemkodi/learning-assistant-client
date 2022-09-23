@@ -62,9 +62,6 @@ const loadScript = (src) => {
   });
 };
 
-const __DEV__ =
-  document.domain === "localhost" || document.domain === "192.168.0.113";
-
 // Landing Page component
 const LandingView = () => {
   const navigate = useNavigate();
@@ -106,9 +103,7 @@ const LandingView = () => {
       return;
     }
 
-    const payment_endpoint = __DEV__
-      ? `${process.env.REACT_APP_API_DEV}/api/users/payment`
-      : `${process.env.REACT_APP_API_PROD}/api/users/payment`;
+    const payment_endpoint = `${process.env.REACT_APP_API}/api/users/payment`;
 
     const data = await fetch(payment_endpoint, {
       method: "POST",
@@ -118,9 +113,7 @@ const LandingView = () => {
     }).then((res) => res.json());
 
     const options = {
-      key: __DEV__
-        ? process.env.REACT_APP_RP_KEY
-        : process.env.REACT_APP_PROD_KEY,
+      key: process.env.REACT_APP_RP_KEY,
       amount: data.amount,
       currency: data.currency,
       name: "Kengram",

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = `${process.env.REACT_APP_API_DEV}/api/lessons/`;
+const API_URL = `${process.env.REACT_APP_API}/api/lessons/`;
 
 // Single lesson fetching service
 const getLesson = async (id, token) => {

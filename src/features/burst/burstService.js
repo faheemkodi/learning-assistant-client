@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = `${process.env.REACT_APP_API_DEV}/api/bursts/`;
+const API_URL = `${process.env.REACT_APP_API}/api/bursts/`;
 
 // Burst creation service'
 const createBurst = async (burstData, token) => {

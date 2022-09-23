@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = `${process.env.REACT_APP_API_DEV}/api/courses/`;
+const API_URL = `${process.env.REACT_APP_API}/api/courses/`;
 
 // Course creation service
 const createCourse = async (courseData, token) => {

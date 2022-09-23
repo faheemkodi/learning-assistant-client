@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const API_URL = `${process.env.REACT_APP_API_DEV}/api/users/`;
-const AUTH_URL = `${process.env.REACT_APP_API_DEV}/api/login`;
+const API_URL = `${process.env.REACT_APP_API}/api/users/`;
+const AUTH_URL = `${process.env.REACT_APP_API}/api/login`;
 
 // User registration service
 const register = async (userData) => {
