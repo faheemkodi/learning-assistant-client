@@ -124,6 +124,9 @@ const LandingView = () => {
       handler: function (response) {
         if (response) {
           navigate("/register");
+          toast.success(
+            "Thank you for your purchase! Please check your email for the invite code."
+          );
         }
       },
       theme: {
