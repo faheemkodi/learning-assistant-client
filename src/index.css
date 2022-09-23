@@ -1,0 +1,234 @@
+/* Viewport Helpers*/
+.viewport-height {
+    height: 100vh;
+}
+
+.viewport-width {
+    width: 100vw;
+}
+
+
+/* AppContainer */
+.fixed-navbar {
+    position: fixed;
+    top: 0px;
+    z-index: +1;
+    background-color: #ECF2F4;
+    box-shadow: 0px 1px 12px 0px lightgrey;
+}
+
+.children {
+    position: relative;
+    top: 100px;
+}
+
+
+/* Cursor */
+.pointer {
+    cursor: pointer;
+}
+
+
+/* Navbar */
+.nav-icon {
+    color:#4C175A;
+    height: 1.5em;
+    width: 1.5em;
+}
+
+.nav-label {
+    font-size: 1em;;
+}
+
+
+/* Course */
+.metric-label {
+    margin-bottom: -2px;
+}
+
+.progress-slim {
+    height:6px !important;
+}
+
+.course-icon {
+    color:#ECF2F4;
+    height: 1em;
+    width: 1em;
+}
+
+.course-badge {
+    min-width: 75px;
+}
+
+
+/* Learn */
+.learn-icon {
+    height: 1.75em;
+    width: 1.75em;
+}
+
+.timer {
+    border-radius: 10%;
+}
+
+.timer-font {
+    font-size: 4em;
+}
+
+.timer-icon {
+    color:#DEDCE6;
+    height: 3.5em;
+    width: 3.5em;
+}
+
+
+/* Misc */
+.brand-shadow {
+    box-shadow: 0px 9px 12px 3px lightgrey;
+}
+
+.number {
+    font-family: "Titillium Web";
+}
+
+.dash-card {
+    width: calc(100% - 48px) !important;
+    box-shadow: 0px 9px 12px 3px lightgrey;
+}
+
+.progress-medium {
+    height:9px !important;
+}
+
+.headline-font {
+    font-size: 3em;
+}
+
+.testimonial-card {
+    height: 300px;
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+}
+
+.feature-card {
+    min-height: 250px !important;
+}
+
+.moneyback {
+    height: 200px;
+    width: 200px;
+}
+
+.landing-logo {
+    height: 40px;
+    width: 124px;
+}
+
+.superhero {
+    height: 250px !important;
+}
+
+.fixed-contact {
+    position: fixed;
+    bottom: 0px;
+    z-index: +1;
+}
+
+/* Fonts */
+@font-face {
+    font-family: Poppins;
+    src: url(./assets/fonts/Poppins-Regular.ttf);
+  }
+
+@font-face {
+    font-family: "Titillium Web";
+    src: url(./assets/fonts/TitilliumWeb-Regular.ttf);
+  }
+
+
+/* Media queries */
+@media screen and (min-width: 992px) {
+    .nav-icon {
+        height: 1.875em;
+        width: 1.875em;
+    }
+
+    .nav-label {
+        font-size: 1.25em;
+    }
+
+    .headline-font {
+        font-size: 4.5em;
+    }
+
+    .testimonial-card {
+        height: 250px;
+    }
+    .moneyback {
+        height: 150px;
+        width: 150px;
+    }
+}
+
+@media screen and (min-width: 364px) {
+    .landing-logo {
+        height: 50px;
+        width: 155px;
+    }
+    
+}
+
+
+/* React-Toastify Overrides */
+:root {
+    --toastify-color-light: #ECF2F4;
+    --toastify-color-dark: #27214F;
+    --toastify-color-info: #191970;
+    --toastify-color-success: #2E8B57;
+    --toastify-color-warning: #E49B0F;
+    --toastify-color-error: #880808;
+    --toastify-color-transparent: rgba(255, 255, 255, 0.7);
+  
+    --toastify-icon-color-info: var(--toastify-color-info);
+    --toastify-icon-color-success: var(--toastify-color-success);
+    --toastify-icon-color-warning: var(--toastify-color-warning);
+    --toastify-icon-color-error: var(--toastify-color-error);
+  
+    --toastify-toast-width: 320px;
+    --toastify-toast-background: #ECF2F4;
+    --toastify-toast-min-height: 64px;
+    --toastify-toast-max-height: 800px;
+    --toastify-font-family: Poppins;
+    --toastify-z-index: 9999;
+  
+    --toastify-text-color-light: #757575;
+    --toastify-text-color-dark: #ECF2F4;
+  
+    /* Used only for colored theme */
+    --toastify-text-color-info: #ECF2F4;
+    --toastify-text-color-success: #ECF2F4;
+    --toastify-text-color-warning: #ECF2F4;
+    --toastify-text-color-error: #ECF2F4;
+  
+    --toastify-spinner-color: #4C175A;
+    --toastify-spinner-color-empty-area: #ECF2F4;
+  
+    /* Used when no type is provided */
+    /* toast("**hello**") */
+    --toastify-color-progress-light: linear-gradient(
+      to right,
+      #27214F,
+      #4C175A,
+      #863B87,
+      #9A52A3
+    );
+    /* Used when no type is provided */
+    --toastify-color-progress-dark: #9A52A3;
+    --toastify-color-progress-info: var(--toastify-color-info);
+    --toastify-color-progress-success: var(--toastify-color-success);
+    --toastify-color-progress-warning: var(--toastify-color-warning);
+    --toastify-color-progress-error: var(--toastify-color-error);
+  }
+    

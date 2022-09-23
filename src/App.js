@@ -1,0 +1,52 @@
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import LoginView from "./pages/Login";
+import RegisterView from "./pages/Register";
+import DashboardView from "./pages/Dashboard";
+import CourseView from "./pages/Course";
+import LessonView from "./pages/Lesson";
+import LearnView from "./pages/Learn";
+import GuideView from "./pages/Guide";
+import InterruptionsView from "./pages/Interruptions";
+import SettingsView from "./pages/Settings";
+import PasswordResetView from "./pages/PasswordReset";
+import LandingView from "./pages/Landing";
+
+const App = () => {
+  return (
+    <>
+      <Router>
+        <Routes>
+          <Route path="/" element={<LandingView />} />
+          <Route path="/dashboard" element={<DashboardView />} />
+          <Route path="/login" element={<LoginView />} />
+          <Route path="/register" element={<RegisterView />} />
+          <Route path="/guide" element={<GuideView />} />
+          <Route path="/interruptions" element={<InterruptionsView />} />
+          <Route path="/settings" element={<SettingsView />} />
+          <Route path="/course/:id" element={<CourseView />} />
+          <Route path="/lesson/:id/learn" element={<LearnView />} />
+          <Route path="/lesson/:id" element={<LessonView />} />
+          <Route path="/password-reset" element={<PasswordResetView />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </Router>
+      <ToastContainer
+        position="top-center"
+        newestOnTop
+        autoClose={2000}
+        pauseOnFocusLoss={false}
+        pauseOnHover={false}
+      />
+    </>
+  );
+};
+
+export default App;
