@@ -85,13 +85,14 @@ const LearnView = () => {
 
   // Timer
   const [active, setActive] = useState(false);
+  const [begin, setBegin] = useState(0);
   const [time, setTime] = useState(0);
 
   useEffect(() => {
     let interval = null;
     if (active) {
       interval = setInterval(() => {
-        setTime((time) => time + 1000);
+        setTime(() => new Date() - begin);
       }, 1000);
     } else {
       clearInterval(interval);
@@ -99,12 +100,13 @@ const LearnView = () => {
     return () => {
       clearInterval(interval);
     };
-  }, [active]);
+  }, [active, begin]);
 
   const handleStart = () => {
     if (topics.length > 0) {
       setActive(true);
       setPlaying(true);
+      setBegin(new Date());
     } else {
       navigate("/dashboard");
     }
