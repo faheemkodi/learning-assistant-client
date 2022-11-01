@@ -22,9 +22,8 @@ import {
   BsSoundwave,
   BsStopCircleFill,
   BsToggleOn,
-  BsVolumeMuteFill,
-  BsVolumeUpFill,
 } from "react-icons/bs";
+import { GiMeditation } from "react-icons/gi";
 import { toast } from "react-toastify";
 import { getTopics, resetTopic } from "../features/topic/topicSlice";
 import { getLesson, resetLesson } from "../features/lesson/lessonSlice";
@@ -92,7 +91,7 @@ const LearnView = () => {
     let interval = null;
     if (active) {
       interval = setInterval(() => {
-        setTime(() => new Date() - begin);
+        setTime(() => new Date().getTime() - begin);
       }, 1000);
     } else {
       clearInterval(interval);
@@ -105,8 +104,7 @@ const LearnView = () => {
   const handleStart = () => {
     if (topics.length > 0) {
       setActive(true);
-      setPlaying(true);
-      setBegin(new Date());
+      setBegin(new Date().getTime());
     } else {
       navigate("/dashboard");
     }
@@ -267,11 +265,11 @@ const LearnView = () => {
                     >
                       <IconContext.Provider
                         value={{
-                          style: { verticalAlign: "middle" },
+                          style: { verticalAlign: "top" },
                           className: "course-icon",
                         }}
                       >
-                        <BsVolumeUpFill />
+                        <GiMeditation />
                       </IconContext.Provider>
                     </Badge>
                   ) : (
@@ -283,10 +281,10 @@ const LearnView = () => {
                     >
                       <IconContext.Provider
                         value={{
-                          style: { verticalAlign: "middle" },
+                          style: { verticalAlign: "top" },
                         }}
                       >
-                        <BsVolumeMuteFill />
+                        <GiMeditation />
                       </IconContext.Provider>
                     </Badge>
                   )}
@@ -301,7 +299,7 @@ const LearnView = () => {
                           style: { verticalAlign: "top" },
                         }}
                       >
-                        <BsSoundwave /> 40Hz Binaural Beat
+                        <BsSoundwave /> Meditating to 40Hz Binaural Beat
                       </IconContext.Provider>
                     </Badge>
                   ) : null}

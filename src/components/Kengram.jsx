@@ -9,7 +9,7 @@ import rehypeKatex from "rehype-katex";
 
 import "katex/dist/katex.min.css";
 
-const Kengram = ({ show, handleClose, handleEdit, header, body }) => {
+const Kengram = ({ show, handleClose, handleEdit, header, body, sudo }) => {
   const markdown = `${body}`;
   const dummy = `
   ### Hello, learner!
@@ -52,18 +52,19 @@ const Kengram = ({ show, handleClose, handleEdit, header, body }) => {
           />
         )}
       </Modal.Body>
-
-      <Modal.Footer className="bg-light">
-        <Button variant="primary" onClick={handleEdit}>
-          <IconContext.Provider
-            value={{
-              style: { verticalAlign: "middle" },
-            }}
-          >
-            <BsPencilFill />
-          </IconContext.Provider>
-        </Button>
-      </Modal.Footer>
+      {sudo === false ? (
+        <Modal.Footer className="bg-light">
+          <Button variant="primary" onClick={handleEdit}>
+            <IconContext.Provider
+              value={{
+                style: { verticalAlign: "middle" },
+              }}
+            >
+              <BsPencilFill />
+            </IconContext.Provider>
+          </Button>
+        </Modal.Footer>
+      ) : null}
     </Modal>
   );
 };

@@ -13,9 +13,9 @@ import {
   BsPlayCircleFill,
   BsStopCircleFill,
   BsToggleOn,
-  BsVolumeUpFill,
   BsWhatsapp,
 } from "react-icons/bs";
+import { GiMeditation } from "react-icons/gi";
 import AppContainer from "../components/AppContainer";
 
 const GuideView = () => {
@@ -253,10 +253,8 @@ const GuideView = () => {
               >
                 <BsPlayCircleFill />
               </IconContext.Provider>{" "}
-              button, the timer starts running, and you'll notice a strange
-              buzzing soundtrack playing in the background. This is a{" "}
-              <span className="text-secondary">40 Hertz Binaural Beat</span>,
-              proven to induce alertness in the brain.
+              button, the timer starts running, and your learning session or{" "}
+              <span className="text-secondary">Burst</span> begins.
             </p>
             <Alert variant="info">
               <h6 className="fw-bold">
@@ -270,22 +268,38 @@ const GuideView = () => {
                 Pro Tip:
               </h6>
               <p>
-                <span className="fw-bold">
-                  Binaural Beats must be listened to using headphones, at a low,
-                  non-distracting volume
-                </span>{" "}
-                . Also, you don't have to listen for your entire learning
-                session. Once you feel energized enough, you can turn it off by
-                pressing the{" "}
+                If, at any time, before, during or after a{" "}
+                <span className="fw-bold">Burst</span>, you feel tired,
+                distracted or if you find difficulty focussing, put on your
+                headphones and press the meditation button{" "}
                 <IconContext.Provider
                   value={{
-                    style: { verticalAlign: "middle" },
+                    style: { verticalAlign: "top" },
                     className: "fs-5",
                   }}
                 >
-                  <BsVolumeUpFill />
+                  <GiMeditation />
+                </IconContext.Provider>
+                . You'll notice a strange buzzing soundtrack playing in the
+                background. This is a{" "}
+                <span className="fw-bold">40 Hz Binaural Beat</span>, proven to
+                increase alertness in the brain.{" "}
+                <span className="fw-bold">
+                  Binaural Beats must be listened to using headphones, at a
+                  low-medium, non-distracting volume
+                </span>{" "}
+                . Once you feel energized enough, you can turn it off by
+                pressing the{" "}
+                <IconContext.Provider
+                  value={{
+                    style: { verticalAlign: "top" },
+                    className: "fs-5",
+                  }}
+                >
+                  <GiMeditation />
                 </IconContext.Provider>{" "}
-                button on the timer.
+                button again. Then, you can go back to learning, feeling
+                refreshed!
               </p>
             </Alert>
             <p>

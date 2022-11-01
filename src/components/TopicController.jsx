@@ -33,20 +33,35 @@ const TopicController = ({ topic }) => {
   } = topicData;
 
   const handleComplete = () => {
-    setTopicData({
-      ...topicData,
-      completed: !completed,
-      revised: !revised,
-    });
-    handleKengramShow();
+    if (completed === false && revised === false) {
+      setTopicData({
+        ...topicData,
+        completed: !completed,
+        revised: !revised,
+      });
+      handleKengramShow();
+    } else {
+      setTopicData({
+        ...topicData,
+        completed: !completed,
+        revised: !revised,
+      });
+    }
   };
 
   const handleRevise = () => {
-    setTopicData({
-      ...topicData,
-      revised: !revised,
-    });
-    handleKengramShow();
+    if (revised === false) {
+      setTopicData({
+        ...topicData,
+        revised: !revised,
+      });
+      handleKengramShow();
+    } else {
+      setTopicData({
+        ...topicData,
+        revised: !revised,
+      });
+    }
   };
 
   const handleCompleteSubmit = () => {
@@ -146,6 +161,7 @@ const TopicController = ({ topic }) => {
         handleEdit={handleKengramEditShow}
         header={topic.name}
         body={topic.kengram}
+        sudo={false}
       />
 
       <KengramEditor

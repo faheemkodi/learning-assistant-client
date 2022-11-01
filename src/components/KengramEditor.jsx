@@ -48,7 +48,7 @@ const KengramEditor = ({
                 as="textarea"
                 rows={36}
                 onChange={handleChange}
-                value={body}
+                value={body === null ? "" : body}
               />
             </Form.Group>
           </Form>

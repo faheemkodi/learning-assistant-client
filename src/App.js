@@ -18,6 +18,12 @@ import InterruptionsView from "./pages/Interruptions";
 import SettingsView from "./pages/Settings";
 import PasswordResetView from "./pages/PasswordReset";
 import LandingView from "./pages/Landing";
+import SuperuserView from "./pages/Superuser";
+import LearnerCoursesView from "./pages/LearnerCourses";
+import LearnerLessonsView from "./pages/LearnerLessons";
+import LearnerTopicsView from "./pages/LearnerTopics";
+import LearnerBurstsView from "./pages/LearnerBursts";
+import RenewalView from "./pages/Renewal";
 
 const App = () => {
   return (
@@ -35,6 +41,18 @@ const App = () => {
           <Route path="/lesson/:id/learn" element={<LearnView />} />
           <Route path="/lesson/:id" element={<LessonView />} />
           <Route path="/password-reset" element={<PasswordResetView />} />
+          <Route path="/superuser" element={<SuperuserView />} />
+          <Route
+            path="/superuser/courses/:id"
+            element={<LearnerCoursesView />}
+          />
+          <Route
+            path="/superuser/lessons/:id"
+            element={<LearnerLessonsView />}
+          />
+          <Route path="/superuser/topics/:id" element={<LearnerTopicsView />} />
+          <Route path="/superuser/bursts/:id" element={<LearnerBurstsView />} />
+          <Route path="/renewal" element={<RenewalView />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Router>

@@ -182,7 +182,7 @@ const Topic = ({ topic }) => {
           {topic.revision_date ? (
             <Row className="mt-2 text-uppercase">
               <Col className="text-start">
-                <span>Revision due on</span>
+                <span>Revision date</span>
               </Col>
               <Col className="text-end">
                 <span>{new Date(topic.revision_date).toDateString()}</span>
@@ -291,6 +291,7 @@ const Topic = ({ topic }) => {
         handleEdit={handleKengramEditShow}
         header={topic.name}
         body={topic.kengram}
+        sudo={false}
       />
 
       <KengramEditor

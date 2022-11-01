@@ -6,6 +6,11 @@ const token = JSON.parse(localStorage.getItem("token"));
 const initialState = {
   token: token ? token : null,
   user: {},
+  users: [],
+  courses: [],
+  lessons: [],
+  topics: [],
+  bursts: [],
   registerError: false,
   registerSuccess: false,
   loginError: false,
@@ -20,6 +25,8 @@ const initialState = {
   getResetCodeSuccess: false,
   resetPasswordError: false,
   resetPasswordSuccess: false,
+  sudoError: false,
+  sudoSuccess: false,
   userLoading: false,
   userMessage: "",
 };
@@ -51,8 +58,8 @@ export const login = createAsyncThunk(
 );
 
 // Logout user
-export const logout = createAsyncThunk("user/logout", async () => {
-  await userService.logout();
+export const logout = createAsyncThunk("user/logout", () => {
+  userService.logout();
 });
 
 // Get user
@@ -123,12 +130,157 @@ export const resetPassword = createAsyncThunk(
   }
 );
 
+// Sudo get all users
+export const getAllUsers = createAsyncThunk(
+  "user/getAll",
+  async (_, thunkAPI) => {
+    try {
+      return await userService.getAllUsers(
+        JSON.parse(localStorage.getItem("token"))
+      );
+    } catch (error) {
+      const userMessage = error.response.data["detail"];
+      return thunkAPI.rejectWithValue(userMessage);
+    }
+  }
+);
+
+// Sudo get user's courses
+export const getUserCourses = createAsyncThunk(
+  "user/getUserCourses",
+  async (id, thunkAPI) => {
+    try {
+      return await userService.getUserCourses(
+        id,
+        JSON.parse(localStorage.getItem("token"))
+      );
+    } catch (error) {
+      const userMessage = error.response.data["detail"];
+      return thunkAPI.rejectWithValue(userMessage);
+    }
+  }
+);
+
+// Sudo get user's lessons
+export const getUserLessons = createAsyncThunk(
+  "user/getUserLessons",
+  async (id, thunkAPI) => {
+    try {
+      return await userService.getUserLessons(
+        id,
+        JSON.parse(localStorage.getItem("token"))
+      );
+    } catch (error) {
+      const userMessage = error.response.data["detail"];
+      return thunkAPI.rejectWithValue(userMessage);
+    }
+  }
+);
+
+// Sudo get user's topics
+export const getUserTopics = createAsyncThunk(
+  "user/getUserTopics",
+  async (id, thunkAPI) => {
+    try {
+      return await userService.getUserTopics(
+        id,
+        JSON.parse(localStorage.getItem("token"))
+      );
+    } catch (error) {
+      const userMessage = error.response.data["detail"];
+      return thunkAPI.rejectWithValue(userMessage);
+    }
+  }
+);
+
+// Sudo get user's bursts
+export const getUserBursts = createAsyncThunk(
+  "user/getUserBursts",
+  async (id, thunkAPI) => {
+    try {
+      return await userService.getUserBursts(
+        id,
+        JSON.parse(localStorage.getItem("token"))
+      );
+    } catch (error) {
+      const userMessage = error.response.data["detail"];
+      return thunkAPI.rejectWithValue(userMessage);
+    }
+  }
+);
+
+// Sudo make user sudo
+export const updateSudo = createAsyncThunk(
+  "user/updateSudo",
+  async (id, thunkAPI) => {
+    try {
+      return await userService.updateSudo(
+        id,
+        JSON.parse(localStorage.getItem("token"))
+      );
+    } catch (error) {
+      const userMessage = error.response.data["detail"];
+      return thunkAPI.rejectWithValue(userMessage);
+    }
+  }
+);
+
+// Sudo renew user
+export const renew = createAsyncThunk("user/renew", async (id, thunkAPI) => {
+  try {
+    return await userService.renew(
+      id,
+      JSON.parse(localStorage.getItem("token"))
+    );
+  } catch (error) {
+    const userMessage = error.response.data["detail"];
+    return thunkAPI.rejectWithValue(userMessage);
+  }
+});
+
+// Sudo delete user
+export const deleteUser = createAsyncThunk(
+  "user/deleteUser",
+  async (id, thunkAPI) => {
+    try {
+      return await userService.deleteUser(
+        id,
+        JSON.parse(localStorage.getItem("token"))
+      );
+    } catch (error) {
+      const userMessage = error.response.data["detail"];
+      return thunkAPI.rejectWithValue(userMessage);
+    }
+  }
+);
+
+// Sudo create invite
+export const sudoInvite = createAsyncThunk(
+  "user/sudoInvite",
+  async (inviteData, thunkAPI) => {
+    try {
+      return await userService.sudoInvite(
+        inviteData,
+        JSON.parse(localStorage.getItem("token"))
+      );
+    } catch (error) {
+      const userMessage = error.response.data["detail"];
+      return thunkAPI.rejectWithValue(userMessage);
+    }
+  }
+);
+
 export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
     resetUser: (state) => {
       state.user = {};
+      state.users = [];
+      state.courses = [];
+      state.lessons = [];
+      state.topics = [];
+      state.bursts = [];
       state.registerError = false;
       state.registerSuccess = false;
       state.loginError = false;
@@ -143,7 +295,8 @@ export const userSlice = createSlice({
       state.getResetCodeSuccess = false;
       state.resetPasswordError = false;
       state.resetPasswordSuccess = false;
-      state.userError = false;
+      state.sudoError = false;
+      state.sudoSuccess = false;
       state.userMessage = "";
     },
   },
@@ -256,6 +409,150 @@ export const userSlice = createSlice({
       .addCase(resetPassword.rejected, (state, action) => {
         state.userLoading = false;
         state.resetPasswordError = true;
+        state.userMessage = action.payload;
+      })
+      .addCase(getAllUsers.pending, (state) => {
+        state.userLoading = true;
+      })
+      .addCase(getAllUsers.fulfilled, (state, action) => {
+        state.userLoading = false;
+        state.sudoSuccess = true;
+        state.users = action.payload;
+        state.users.sort(function (a, b) {
+          return a.id - b.id;
+        });
+      })
+      .addCase(getAllUsers.rejected, (state, action) => {
+        state.userLoading = false;
+        state.sudoError = true;
+        state.userMessage = action.payload;
+      })
+      .addCase(getUserCourses.pending, (state) => {
+        state.userLoading = true;
+      })
+      .addCase(getUserCourses.fulfilled, (state, action) => {
+        state.userLoading = false;
+        state.sudoSuccess = true;
+        state.courses = action.payload;
+        state.courses.sort(function (a, b) {
+          return a.id - b.id;
+        });
+      })
+      .addCase(getUserCourses.rejected, (state, action) => {
+        state.userLoading = false;
+        state.sudoError = true;
+        state.userMessage = action.payload;
+      })
+      .addCase(getUserLessons.pending, (state) => {
+        state.userLoading = true;
+      })
+      .addCase(getUserLessons.fulfilled, (state, action) => {
+        state.userLoading = false;
+        state.sudoSuccess = true;
+        state.lessons = action.payload;
+        state.lessons.sort(function (a, b) {
+          return a.id - b.id;
+        });
+      })
+      .addCase(getUserLessons.rejected, (state, action) => {
+        state.userLoading = false;
+        state.sudoError = true;
+        state.userMessage = action.payload;
+      })
+      .addCase(getUserTopics.pending, (state) => {
+        state.userLoading = true;
+      })
+      .addCase(getUserTopics.fulfilled, (state, action) => {
+        state.userLoading = false;
+        state.sudoSuccess = true;
+        state.topics = action.payload;
+        state.topics.sort(function (a, b) {
+          return a.id - b.id;
+        });
+      })
+      .addCase(getUserTopics.rejected, (state, action) => {
+        state.userLoading = false;
+        state.sudoError = true;
+        state.userMessage = action.payload;
+      })
+      .addCase(getUserBursts.pending, (state) => {
+        state.userLoading = true;
+      })
+      .addCase(getUserBursts.fulfilled, (state, action) => {
+        state.userLoading = false;
+        state.sudoSuccess = true;
+        state.bursts = action.payload;
+        state.bursts.sort(function (a, b) {
+          return a.id - b.id;
+        });
+      })
+      .addCase(getUserBursts.rejected, (state, action) => {
+        state.userLoading = false;
+        state.sudoError = true;
+        state.userMessage = action.payload;
+      })
+      .addCase(updateSudo.pending, (state) => {
+        state.userLoading = true;
+      })
+      .addCase(updateSudo.fulfilled, (state, action) => {
+        state.userLoading = false;
+        state.sudoSuccess = true;
+        state.users = state.users.filter(
+          (user) => user.id !== action.payload.id
+        );
+        state.users.push(action.payload);
+        state.users.sort(function (a, b) {
+          return a.id - b.id;
+        });
+      })
+      .addCase(updateSudo.rejected, (state, action) => {
+        state.userLoading = false;
+        state.sudoError = true;
+        state.userMessage = action.payload;
+      })
+      .addCase(renew.pending, (state) => {
+        state.userLoading = true;
+      })
+      .addCase(renew.fulfilled, (state, action) => {
+        state.userLoading = false;
+        state.sudoSuccess = true;
+        state.users = state.users.filter(
+          (user) => user.id !== action.payload.id
+        );
+        state.users.push(action.payload);
+        state.users.sort(function (a, b) {
+          return a.id - b.id;
+        });
+      })
+      .addCase(renew.rejected, (state, action) => {
+        state.userLoading = false;
+        state.sudoError = true;
+        state.userMessage = action.payload;
+      })
+      .addCase(deleteUser.pending, (state) => {
+        state.userLoading = true;
+      })
+      .addCase(deleteUser.fulfilled, (state, action) => {
+        state.userLoading = false;
+        state.sudoSuccess = true;
+        state.users = state.users.filter((user) => user.id !== action.payload);
+      })
+      .addCase(deleteUser.rejected, (state, action) => {
+        state.userLoading = false;
+        state.sudoError = true;
+        state.userMessage = action.payload;
+      })
+      .addCase(sudoInvite.pending, (state) => {
+        state.userLoading = true;
+      })
+      .addCase(sudoInvite.fulfilled, (state, action) => {
+        state.userLoading = false;
+        state.sudoSuccess = true;
+        state.users = state.users.filter((user) => user.id !== action.payload);
+      })
+      .addCase(sudoInvite.rejected, (state, action) => {
+        state.userLoading = false;
+        state.sudoError = true;
         state.userMessage = action.payload;
       });
   },

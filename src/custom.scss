@@ -1,14 +1,16 @@
-$primary: #4C175A;
-$secondary: #863B87;
-$success: #2E8B57;
+$primary: #4c175a;
+$secondary: #863b87;
+$success: #228b22;
 $info: #191970;
-$warning: #E49B0F;
+$warning: #e49b0f;
 $danger: #880808;
-$light: #ECF2F4;
-$dark: #27214F;
-$purple: #9A52A3;
-$white: #DEDCE6;
+$light: #ecf2f4;
+$dark: #27214f;
+$purple: #9a52a3;
+$white: #dedce6;
 $body-bg: $light;
-$font-family-sans-serif: Poppins, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$font-family-sans-serif: Poppins, -apple-system, BlinkMacSystemFont, "Segoe UI",
+  Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+  "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
-@import "~bootstrap/scss/bootstrap"
+@import "~bootstrap/scss/bootstrap";

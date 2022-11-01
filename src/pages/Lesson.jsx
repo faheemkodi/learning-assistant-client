@@ -367,6 +367,7 @@ const LessonView = () => {
           handleEdit={handleKengramEditShow}
           header={lesson.name}
           body={lesson.kengram}
+          sudo={false}
         />
 
         <KengramEditor

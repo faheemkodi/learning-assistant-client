@@ -114,13 +114,17 @@ const DashboardView = () => {
     handleKengramEditClose();
   };
 
+  const active = user.active;
+
   useEffect(() => {
     if (!token) {
       navigate("/login");
+    } else if (active === false) {
+      navigate("/renewal");
     } else {
       setLoggedIn(true);
     }
-  }, [token, navigate]);
+  }, [token, navigate, active]);
 
   useEffect(() => {
     if (loggedIn) {
@@ -421,6 +425,7 @@ const DashboardView = () => {
           handleEdit={handleKengramEditShow}
           header={user.name}
           body={user.kengram}
+          sudo={false}
         />
 
         <KengramEditor

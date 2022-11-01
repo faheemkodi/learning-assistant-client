@@ -15,6 +15,7 @@ import {
   BsCheckLg,
   BsEyeFill,
   BsKeyFill,
+  BsPersonBadgeFill,
   BsPersonFill,
   BsPlugFill,
   BsWhatsapp,
@@ -251,7 +252,7 @@ const SettingsView = () => {
           {/* Subscription details */}
           <Row className="fs-4 mb-4">
             <Col xs={10} className="text-start">
-              Subscription details
+              Subscription status
             </Col>
             <Col xs={2} className="text-end">
               <Badge className="pointer" onClick={handleSubscriptionShow}>
@@ -266,6 +267,7 @@ const SettingsView = () => {
               </Badge>
             </Col>
           </Row>
+
           {/* Book mentoring */}
           <Row className="fs-4 mb-4">
             <Col xs={10} className="text-start">
@@ -286,6 +288,7 @@ const SettingsView = () => {
               </a>
             </Col>
           </Row>
+
           {/* Report bug */}
           <Row className="fs-4 mb-4">
             <Col xs={10} className="text-start">
@@ -306,6 +309,31 @@ const SettingsView = () => {
               </a>
             </Col>
           </Row>
+
+          {/* Superuser Dashboard */}
+          {user.superuser ? (
+            <Row className="fs-4 mb-4">
+              <Col xs={10} className="text-start">
+                Superuser dashboard
+              </Col>
+              <Col xs={2} className="text-end">
+                <Badge
+                  className="pointer"
+                  onClick={() => navigate("/superuser")}
+                >
+                  <IconContext.Provider
+                    value={{
+                      style: { verticalAlign: "middle" },
+                      className: "course-icon",
+                    }}
+                  >
+                    <BsPersonBadgeFill />
+                  </IconContext.Provider>
+                </Badge>
+              </Col>
+            </Row>
+          ) : null}
+
           {/* Logout */}
           <Row className="fs-4 mb-4">
             <Col xs={10} className="text-start">
@@ -326,6 +354,7 @@ const SettingsView = () => {
           </Row>
         </Col>
       </Row>
+
       {/* Modals */}
       {/* Edit user details modal */}
       <Modal show={userShow} onHide={handleUserClose} centered>
@@ -468,22 +497,17 @@ const SettingsView = () => {
       <Modal show={subscriptionShow} onHide={handleSubscriptionClose} centered>
         <Modal.Header closeButton>
           <Modal.Title className="text-primary">
-            Subscription details
+            Subscription status
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className="text-center">
-          <h3 className="">
-            <Badge bg="success">Insiders Lifetime Access</Badge>
-          </h3>
-          <p className="text-success">
-            Valid till 01-07-2025<span className="small">*</span>
+          <p className={user.active ? "text-success" : "text-danger"}>
+            {user.active
+              ? `Valid till ${new Date(user.expiry_date).toDateString()}`
+              : `Expired on ${new Date(user.expiry_date).toDateString()}`}
           </p>
           <p className="text-muted small">
             Kengram Learning Assistant v0.1-beta
-          </p>
-          <p className="text-muted small">
-            <span className="small">*</span>Validity will be renewed during
-            every version upgrade
           </p>
         </Modal.Body>
       </Modal>
