@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useWakeLock } from "react-screen-wake-lock";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import Container from "react-bootstrap/Container";
@@ -33,6 +34,8 @@ import TopicController from "../components/TopicController";
 
 const LearnView = () => {
   let { id } = useParams();
+
+  const { isSupported, released, request, release } = useWakeLock();
 
   const [audio] = useState(new Audio("/40Hz.mp3"));
   const [alarm] = useState(new Audio("/alarm.wav"));
@@ -121,6 +124,9 @@ const LearnView = () => {
     if (topics.length > 0) {
       setActive(true);
       setBegin(new Date().getTime() + pomodoro);
+      if (isSupported === true && released === true) {
+        request();
+      }
     } else {
       navigate("/dashboard");
     }
@@ -135,6 +141,9 @@ const LearnView = () => {
     });
     setTime(pomodoro);
     handleFirstShow();
+    if (isSupported === true && released === false) {
+      release();
+    }
   };
 
   // First modal
