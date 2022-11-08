@@ -35,8 +35,14 @@ const LearnView = () => {
   let { id } = useParams();
 
   const [audio] = useState(new Audio("/40Hz.mp3"));
+  const [alarm] = useState(new Audio("/alarm.wav"));
+
   audio.loop = true;
+  alarm.loop = true;
+
   const [playing, setPlaying] = useState(false);
+  const [finished, setFinished] = useState(false);
+
   useEffect(() => {
     if (playing) {
       audio.play();
@@ -44,6 +50,14 @@ const LearnView = () => {
       audio.pause();
     }
   }, [audio, playing]);
+
+  useEffect(() => {
+    if (finished) {
+      alarm.play();
+    } else {
+      alarm.pause();
+    }
+  }, [alarm, finished]);
 
   const [loggedIn, setLoggedIn] = useState(false);
 
@@ -83,15 +97,17 @@ const LearnView = () => {
   const { lesson_id, duration, interrupted, interruption } = burstData;
 
   // Timer
+  const pomodoro = 1500000;
+
   const [active, setActive] = useState(false);
   const [begin, setBegin] = useState(0);
-  const [time, setTime] = useState(0);
+  const [time, setTime] = useState(pomodoro);
 
   useEffect(() => {
     let interval = null;
-    if (active) {
+    if (active && time > 1000) {
       interval = setInterval(() => {
-        setTime(() => new Date().getTime() - begin);
+        setTime(() => begin - new Date().getTime());
       }, 1000);
     } else {
       clearInterval(interval);
@@ -99,12 +115,12 @@ const LearnView = () => {
     return () => {
       clearInterval(interval);
     };
-  }, [active, begin]);
+  }, [active, begin, time]);
 
   const handleStart = () => {
     if (topics.length > 0) {
       setActive(true);
-      setBegin(new Date().getTime());
+      setBegin(new Date().getTime() + pomodoro);
     } else {
       navigate("/dashboard");
     }
@@ -113,8 +129,11 @@ const LearnView = () => {
   const handleStop = () => {
     setPlaying(false);
     setActive(false);
-    setBurstData({ ...burstData, duration: Math.floor(time / 60000) });
-    setTime(0);
+    setBurstData({
+      ...burstData,
+      duration: Math.floor((pomodoro - time) / 60000),
+    });
+    setTime(pomodoro);
     handleFirstShow();
   };
 
@@ -155,6 +174,25 @@ const LearnView = () => {
     dispatch(resetTopic());
     navigate(-1);
   };
+
+  useEffect(() => {
+    if (time <= 1000) {
+      setFinished(true);
+    }
+  }, [time]);
+
+  useEffect(() => {
+    if (finished === true) {
+      setPlaying(false);
+      setActive(false);
+      setBurstData({
+        ...burstData,
+        duration: Math.floor((pomodoro - time) / 60000),
+      });
+      setTime(pomodoro);
+      handleFirstShow();
+    }
+  }, [finished, alarm, burstData, time]);
 
   useEffect(() => {
     if (loggedIn) {
@@ -211,6 +249,7 @@ const LearnView = () => {
 
   const handleBurstSubmit = (e) => {
     e.preventDefault();
+    setFinished(false);
     if (duration < 1) {
       navigate(-1);
     } else if (wasInterrupted && interruption === "") {

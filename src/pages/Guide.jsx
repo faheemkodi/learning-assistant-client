@@ -187,11 +187,11 @@ const GuideView = () => {
             </p>
             <p>
               A <span className="text-secondary">Burst</span>, or learning
-              session, is a period of time you're going to spend, during which
-              you'll be intensely focussed on learning, and nothing else. No
-              wandering thoughts, no digital devices, no interactions with
-              people or pets - just pure, laser-sharp focus on whatever you're
-              studying. Press the{" "}
+              session, is a period of 25 minutes during which you'll be
+              intensely focussed on learning, and nothing else. No wandering
+              thoughts, no digital devices, no interactions with people or pets
+              - just pure, laser-sharp focus on whatever you're studying. Press
+              the{" "}
               <IconContext.Provider
                 value={{
                   style: { verticalAlign: "top" },
@@ -226,8 +226,9 @@ const GuideView = () => {
               <p>
                 Think of a <span className="fw-bold">Burst</span> as a{" "}
                 <span className="fw-bold">meditative learning session</span>.
-                Focus your entire attention to the study material, and whenever
-                you lose focus, press the{" "}
+                Focus your entire attention to the study material for the entire
+                25 minutes, after which you'll be notified. If you absolutely
+                must stop a session midway, press the{" "}
                 <IconContext.Provider
                   value={{
                     style: { verticalAlign: "top" },
@@ -236,9 +237,10 @@ const GuideView = () => {
                 >
                   <BsStopCircleFill />
                 </IconContext.Provider>{" "}
-                button. Initially, it's natural for your{" "}
-                <span className="fw-bold">Bursts</span> to be of short
-                durations. You'll notice that with continuous and consistent
+                button. Initially, it's natural for your mind to wander off
+                during
+                <span className="fw-bold">Bursts</span>, and that's totally
+                normal. You'll notice that with continuous and consistent
                 learning, your focusing and learning ability dramatically
                 improves!
               </p>
@@ -268,10 +270,10 @@ const GuideView = () => {
                 Pro Tip:
               </h6>
               <p>
-                If, at any time, before, during or after a{" "}
-                <span className="fw-bold">Burst</span>, you feel tired,
-                distracted or if you find difficulty focussing, put on your
-                headphones and press the meditation button{" "}
+                If, at any point during a <span className="fw-bold">Burst</span>
+                , you feel tired, distracted or if you find difficulty focussing
+                to the end of 25 minutes, put on your headphones and press the
+                meditation button{" "}
                 <IconContext.Provider
                   value={{
                     style: { verticalAlign: "top" },
@@ -299,11 +301,18 @@ const GuideView = () => {
                   <GiMeditation />
                 </IconContext.Provider>{" "}
                 button again. Then, you can go back to learning, feeling
-                refreshed!
+                refreshed! Or if the <span className="fw-bold">Burst</span> has
+                ended, you can come back for the next one!
+                <br />
+                <span className="fw-bold">
+                  Make sure to take at least a 5-minute break between two
+                  bursts. This is important for your brain to function properly!
+                </span>
               </p>
             </Alert>
             <p>
-              When you press{" "}
+              When the <span className="text-secondary">Burst</span> has ended,
+              or when you press{" "}
               <IconContext.Provider
                 value={{
                   style: { verticalAlign: "top" },
