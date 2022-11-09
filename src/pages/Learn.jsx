@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useWakeLock } from "react-screen-wake-lock";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import Container from "react-bootstrap/Container";
@@ -31,14 +30,20 @@ import { getLesson, resetLesson } from "../features/lesson/lessonSlice";
 import { getCourse, resetCourse } from "../features/course/courseSlice";
 import { createBurst, resetBurst } from "../features/burst/burstSlice";
 import TopicController from "../components/TopicController";
+import { createVideo, deleteVideo } from "../utils/misc";
 
 const LearnView = () => {
   let { id } = useParams();
 
-  const { isSupported, released, request, release } = useWakeLock();
+  const displayVideo = async () => {
+    const created = await createVideo("screen-waker", "/blank.mp4");
+    if (!created) {
+      alert("Failed");
+    }
+  };
 
   const [audio] = useState(new Audio("/40Hz.mp3"));
-  const [alarm] = useState(new Audio("/alarm.wav"));
+  const [alarm] = useState(new Audio("/alarm.mp3"));
 
   audio.loop = true;
   alarm.loop = true;
@@ -122,17 +127,20 @@ const LearnView = () => {
 
   const handleStart = () => {
     if (topics.length > 0) {
+      if (document.getElementById("screen-waker") === null) {
+        displayVideo();
+      }
       setActive(true);
       setBegin(new Date().getTime() + pomodoro);
-      if (isSupported === true && released === true) {
-        request();
-      }
     } else {
       navigate("/dashboard");
     }
   };
 
   const handleStop = () => {
+    if (document.getElementById("screen-waker") !== null) {
+      deleteVideo("screen-waker");
+    }
     setPlaying(false);
     setActive(false);
     setBurstData({
@@ -141,9 +149,6 @@ const LearnView = () => {
     });
     setTime(pomodoro);
     handleFirstShow();
-    if (isSupported === true && released === false) {
-      release();
-    }
   };
 
   // First modal
@@ -185,10 +190,10 @@ const LearnView = () => {
   };
 
   useEffect(() => {
-    if (time <= 1000) {
+    if (new Date().getTime() - begin === pomodoro) {
       setFinished(true);
     }
-  }, [time]);
+  }, [begin]);
 
   useEffect(() => {
     if (finished === true) {
@@ -258,6 +263,9 @@ const LearnView = () => {
 
   const handleBurstSubmit = (e) => {
     e.preventDefault();
+    if (document.getElementById("screen-waker") !== null) {
+      deleteVideo("screen-waker");
+    }
     setFinished(false);
     if (duration < 1) {
       navigate(-1);
@@ -281,6 +289,9 @@ const LearnView = () => {
 
   useEffect(() => {
     return () => {
+      if (document.getElementById("screen-waker") !== null) {
+        deleteVideo("screen-waker");
+      }
       dispatch(resetLesson());
       dispatch(resetCourse());
       dispatch(resetTopic());
