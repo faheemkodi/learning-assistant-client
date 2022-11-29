@@ -192,7 +192,7 @@ const LandingView = () => {
               >
                 Unlock Your Brainpower For{" "}
                 <span className="number">
-                  {currency === "INR" ? "₹369" : "$6"}
+                  {currency === "INR" ? "₹999" : "$18"}
                 </span>
               </Button>
             </Col>
@@ -392,8 +392,8 @@ const LandingView = () => {
             .
             <br />
             <br />
-            For the price of a textbook, get the tools to make your education
-            worth every penny.
+            For the price of a textbook or two, get the tools to make your
+            education worth every penny.
           </h3>
           <Col xs={12} md={6}>
             <Button
@@ -406,7 +406,7 @@ const LandingView = () => {
             >
               Unlock Your Brainpower For{" "}
               <span className="number">
-                {currency === "INR" ? "₹369" : "$6"}
+                {currency === "INR" ? "₹999" : "$18"}
               </span>
             </Button>
           </Col>
@@ -583,7 +583,9 @@ const LandingView = () => {
             }}
           >
             Unlock Your Brainpower For{" "}
-            <span className="number">{currency === "INR" ? "₹369" : "$6"}</span>
+            <span className="number">
+              {currency === "INR" ? "₹999" : "$18"}
+            </span>
           </Button>
         </Col>
       </Row>
