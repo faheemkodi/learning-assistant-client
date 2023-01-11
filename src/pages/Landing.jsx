@@ -77,11 +77,9 @@ const LandingView = () => {
     if (token) {
       navigate("/dashboard");
     } else {
-      if (currency === "") {
-        getPrice();
-      }
+      navigate("/login");
     }
-  }, [token, currency, navigate]);
+  }, [token, navigate]);
 
   // Display Razorpay
   const displayRazorpay = async () => {
@@ -966,26 +964,7 @@ const LandingView = () => {
           to help learners improve their ability. Over the course of piloting
           the workshop for a few months, we made one crucial discovery.
         </p>
-        <p>
-          Although people found the methodology useful, and vowed commitment to
-          their learning goals set during the workshop, most of them failed to
-          stick to plan, lost motivation, and gave up.
-        </p>
-        <p>
-          It seemed liked mere words and motivation simply didn't cut it. So, as
-          an experiment, we decided to build the{" "}
-          <span className="fst-italic">Learning Assistant</span>, an app that
-          would help these learners actually implement the principles on a
-          day-to-day basis. And we assigned ourselves their accountability
-          partners by providing{" "}
-          <span className="fst-italic">1-on-1 Personal Mentoring</span>.
-        </p>
-        <p>
-          By enhancing our training with technology and mentoring, we discovered
-          the Holy Grail of effective learning. And thus, the{" "}
-          <span className="fst-italic">Mastery Learning Challenge</span> was
-          born!
-        </p>
+
         <p>
           Today, it has evolved into a program I wish was available for me
           during my prime student years. It would have saved me a lot of
