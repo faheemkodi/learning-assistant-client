@@ -17,7 +17,6 @@ import GuideView from "./pages/Guide";
 import InterruptionsView from "./pages/Interruptions";
 import SettingsView from "./pages/Settings";
 import PasswordResetView from "./pages/PasswordReset";
-import LandingView from "./pages/Landing";
 import SuperuserView from "./pages/Superuser";
 import LearnerCoursesView from "./pages/LearnerCourses";
 import LearnerLessonsView from "./pages/LearnerLessons";
@@ -30,7 +29,6 @@ const App = () => {
     <>
       <Router>
         <Routes>
-          <Route path="/" element={<LandingView />} />
           <Route path="/dashboard" element={<DashboardView />} />
           <Route path="/login" element={<LoginView />} />
           <Route path="/register" element={<RegisterView />} />
